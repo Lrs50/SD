@@ -1,0 +1,30 @@
+module teste (CLK, LED);
+    input CLK;
+    output reg LED;
+    reg estado;
+    reg [31:0]count;
+    initial count = 0;
+    parameter ligado = 1, desligado = 0;
+    
+    always @ (posedge CLK) begin
+		count = count + 1;
+		case(estado)
+			desligado: 
+				begin
+					if(count == 100000000) begin
+						estado = ligado;
+						LED = 1;
+						count = 0;
+					end
+				end
+			ligado: 
+				begin
+					if(count == 100000000) begin
+						estado = desligado;
+						LED = 0;
+						count = 0;
+					end
+				end	
+		endcase
+	end
+endmodule
