@@ -1,0 +1,24 @@
+module teste(Entra, Sai, vet);
+  input wire [2:0] Entra, vet;
+  output reg [3:0] Sai;
+  input clk;
+  assign vet = 2'b11;
+  assign Entra = 2'b01;
+  
+  //initial begin
+   // assign clk = 0;
+ // end
+ // always begin
+//    assign clk = ~clk;
+  //end
+  
+  
+  initial begin 
+  assign Sai = vet+Entra;
+  end
+  
+  always @(*) begin
+    $display("the value is %b%b%b",Sai[2], Sai[1],Sai[0]);
+    $write(Sai[2]|Sai[1]|Sai[0]);
+  end
+endmodule
