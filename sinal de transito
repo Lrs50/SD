@@ -1,0 +1,48 @@
+module teste (CLK, LED1, LED2, LED3);
+    input CLK;
+    output reg LED1, LED2, LED3;
+    reg [1:0] estado;
+    reg [31:0]count;
+    initial count = 0;
+    initial LED1=1;
+    initial LED2=0;
+    initial LED3=0;
+    parameter verde = 1, vermelho = 0, amarelo = 2;
+    initial estado = verde;
+    always @ (posedge CLK) begin
+		count = count + 1;
+		case(estado)
+			verde: 
+				begin
+					if(count == 150000000) begin
+						estado = amarelo;
+						LED1 = 0;
+						LED2 = 1;
+						LED3 = 0;
+						count = 0;
+					end
+				end
+			vermelho: 
+				begin
+					if(count == 100000000) begin
+						estado = verde;
+						LED1 = 1;
+						LED2 = 0;
+						LED3 = 0;
+						count = 0;
+					end
+				end
+			amarelo:
+				begin
+					if(count == 50000000) begin
+						estado = vermelho;
+						LED1 = 0;
+						LED2 = 0;
+						LED3 = 1;
+						count = 0;
+					end
+				end
+		endcase
+	end
+	
+endmodule
