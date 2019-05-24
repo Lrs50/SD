@@ -1,0 +1,41 @@
+//#define pi 3.1415926535897
+
+/* 
+ * Do not change Module name 
+*/
+
+module teste (var);
+    reg clk;
+    reg clk_1s;
+    reg [3:0]tmp_1s;
+    input wire var;
+    integer put = 0;
+    always @(*) begin
+        //while(1)begin
+            if(clk == 1) begin
+                clk <= 0;
+            end
+            else begin
+                clk <= 1;
+            end
+        //end
+    end
+    always @(posedge clk)begin
+        tmp_1s = tmp_1s + 1;
+        if(tmp_1s <= 5)begin
+            clk_1s <= 0;
+        end
+        else if(tmp_1s >= 10)begin
+            clk_1s <= 1;
+            tmp_1s <= 1;
+        end
+        else begin
+            clk_1s <= 1;
+        end
+    end
+    always @(*) begin
+    put = put + 1;
+      $display("%d", put);
+      //assign var = var + 1;
+    end
+endmodule
